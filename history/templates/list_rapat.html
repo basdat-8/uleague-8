@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Daftar Rapat</title>
+  </head>
+  <body>
+    <h1>Daftar Rapat</h1>
+    <table>
+      <tr>
+        <th>Rapat</th>
+        <th>Nama Panitia</th>
+        <th>Stadion</th>
+        <th>Tanggal dan Waktu</th>
+        <th>Action</th>
+      </tr>
+      {% for rapat in list_rapat %}
+      <tr>
+        <td>{{ rapat.nama_tim }}</td>
+        <td>{{ rapat.panitia }}</td>
+        <td>{{ rapat.stadion }}</td>
+        <td>{{ rapat.tanggal_waktu }}</td>
+        <td><a href="{% url 'lihat_laporan' rapat.id %}">Lihat Laporan</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
