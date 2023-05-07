@@ -1,0 +1,69 @@
+{% extends "base_authentication.html" %} 
+
+{% block authentication_content %}
+<form action="" class="d-flex flex-column gap-4 align-items-center w-100">
+    <span class="fw-semibold fs-2">Registration</span>
+    <div class="d-flex flex-column gap-3 w-100">
+        <div class="d-flex w-100 gap-3">
+            <div class="d-flex flex-column gap-2 w-50">
+                <label for="first-name">Nama Depan</label>
+                <input class="form-control" id="first-name" type="text" placeholder="John">
+            </div>
+            <div class="d-flex flex-column gap-2 w-50">
+                <label for="last-name">Nama Belakang</label>
+                <input class="form-control" id="last-name" type="text" placeholder="Doe">
+            </div>
+        </div>
+        <div class="d-flex w-100 gap-3">
+            <div class="d-flex flex-column gap-2 w-50">
+                <label for="phone-number">No HP</label>
+                <input class="form-control" id="phone-number" type="tel" placeholder="0848567891">
+            </div>
+            <div class="d-flex flex-column gap-2 w-50">
+                <label for="address">Alamat</label>
+                <input class="form-control" id="address" type="text" placeholder="Jalan Senang">
+            </div>
+        </div>
+        <div class="d-flex w-100 gap-3">
+            <div class="d-flex flex-column gap-2 w-50">
+                <label for="email">Email</label>
+                <input class="form-control" id="email" type="email" placeholder="example@mail.com">
+            </div>
+            <div class="d-flex flex-column gap-2 w-50">
+                <label for="password">Password</label>
+                <input class="form-control" id="password" type="password" placeholder="Masukan Password">
+            </div>
+        </div>
+        <div class="d-flex w-100 gap-3">
+            <div class="d-flex flex-column gap-2 w-50">
+                <label for="status">Status</label>
+                <select id="status" class="form-select" aria-label="Default select example">
+                    <option selected>Pilih Status</option>
+                    <option value="mahasiswa">mahasiswa</option>
+                    <option value="dosen">dosen</option>
+                    <option value="tendik">tendik</option>
+                    <option value="umum">umum</option>
+                    <option value="alumni">alumni</option>
+                  </select>
+            </div>
+            <div class="d-flex flex-column gap-2 w-50">
+                <label for="role">Role</label>
+                <select id="role" class="form-select" aria-label="Default select example">
+                    <option selected>Pilih Role</option>
+                    <option value="manajer">manajer</option>
+                    <option value="penonton">penonton</option>
+                    <option value="panitia">panitia</option>
+                </select>
+            </div>
+        </div>
+        <div class="d-flex flex-column gap-2 w-100">
+            <label for="jabatan">Jabatan</label>
+            <input class="form-control" id="jabatan" type="text" placeholder="Ketua Pelaksana">
+        </div>
+        <div class="d-flex gap-2 w-100">
+            <button class="btn-secondary btn w-50">Login</button>
+            <button class="btn-success btn w-50">Register</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

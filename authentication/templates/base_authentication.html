@@ -1,0 +1,11 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<div class="w-100 vh-100 d-flex justify-content-center align-items-center">
+    <div class="d-flex flex-column gap-4 align-items-center w-50">
+        <span class="fw-bold fs-1">U League - 8</span>
+        {% block authentication_content %}
+        {% endblock authentication_content %}
+    </div>
+</div>
+{% endblock %}
