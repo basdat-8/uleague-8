@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'bootstrap5',
     'authentication',
     'manager',
-    'history'
+    'history',
+    'committee'
 ]
 
 MIDDLEWARE = [

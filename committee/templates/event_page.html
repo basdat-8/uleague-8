@@ -1,0 +1,30 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<div class="d-flex flex-column gap-4 align-items-center justify-content-center w-75 py-5">
+    <div class="d-flex flex-column gap-2 w-100">
+        <div class="d-flex w-100 justify-content-end">
+            <button class="btn-primary btn">Submit</button>
+        </div>
+        <table class="table table-striped table-hover">
+            <tr>
+                <th class="text-center">Tim 1</th>
+                <th class="text-center">Tim 2</th>
+                <th class="text-center">Peristiwa</th>
+            </tr>
+        
+            <tr>
+                <th class="align-middle text-center">A</th>
+                <th class="align-middle text-center">B</th>
+                <th class="align-middle text-center">
+                    <div class="d-flex flex-column gap-2">
+                        <a href="">Masukkan Peristiwa Tim 1</a>
+                        <a href="">Masukkan Peristiwa Tim 2</a>
+                    </div>
+                </th>
+            </tr>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
