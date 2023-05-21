@@ -81,9 +81,13 @@ WSGI_APPLICATION = 'uleague_8.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+   'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'uleague',
+        'USER': 'postgres',
+        'PASSWORD': 'Ms98bmhWCLzbXprfHunN',
+        'HOST': 'containers-us-west-40.railway.app',  # Typically 'localhost' or '127.0.0.1' for local development
+        'PORT': '5798',  # Typically '5432' for PostgreSQL
     }
 }
 
