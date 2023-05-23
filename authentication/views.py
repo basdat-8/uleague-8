@@ -20,14 +20,15 @@ def show_login_page(request):
     return render(request, 'login.html')
 
 def show_dashboard_page(request):
+    if not "username" in request.session:
+        return redirect('/login')
+    
     username = request.session['username']
     role = request.session['role']
     
     user  = get_user_by_role(username=username, role=role)
     additional_data = get_additional_data(id=user["id"], role=role)
     
-    print(additional_data)
-
     context = {
         "user": user,
         "additional_data": additional_data
