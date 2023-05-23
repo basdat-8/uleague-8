@@ -38,16 +38,36 @@
         </div>
     </div>
     <div class="d-flex flex-column gap-2 w-50">
-        <h3>Managed Team</h3>
+        {% if request.session.role == 'MANAJER'  %}
+            <h3>Managed Team</h3>
+        {% elif request.session.role == 'PANITIA' %}
+            <h3>Meeting List</h3>
+        {% else %}
+        {% endif %}
         <table class="table table-striped table-hover w-100">
             <tr>
-                <th class="text-center">Nama Tim</th>
-                <th class="text-center">Universitas</th>
+                {% if request.session.role == 'MANAJER'  %}
+                    <th class="text-center">Nama Tim</th>
+                    <th class="text-center">Universitas</th>
+                {% elif request.session.role == 'PANITIA' %}
+                    <th class="text-center">Tim Bertanding</th>
+                    <th class="text-center">Stadium</th>
+                    <th class="text-center">Tanggal & Waktu</th>
+                {% else %}
+                {% endif %}
+              
             </tr>
             {% for data in additional_data %}
             <tr>
-                <th class="text-center fw-normal">{{data.nama_tim}}</th>
-                <th class="text-center fw-normal">{{data.universitas}}</th>
+                {% if request.session.role == 'MANAJER'  %}
+                    <th class="text-center fw-normal">{{data.nama_tim}}</th>
+                    <th class="text-center fw-normal">{{data.universitas}}</th>
+                {% elif request.session.role == 'PANITIA' %}
+                    <th class="text-center fw-normal"><span class="fw-bold">{{data.tim_a}}</span> VS <span class="fw-bold">{{data.tim_b}}</span></th>
+                    <th class="text-center fw-normal">{{data.stadium}}</th>
+                    <th class="text-center fw-normal">{{data.tanggal_rapat}}</th>
+                {% else %}
+                {% endif %}
             </tr>
             {% endfor %}
 
