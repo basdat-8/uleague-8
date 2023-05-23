@@ -1,4 +1,32 @@
-<!DOCTYPE html>
+{% extends "base.html" %} {% block content %}
+<div class="d-flex flex-column gap-4 align-items-center justify-content-center w-75 py-5">
+  <div class="d-flex flex-column gap-2 w-100">
+    <div class="d-flex w-100 justify-content-center">
+      <span class="fw-semibold fs-2">Daftar Rapat</span>
+    </div>
+    <table class="table table-striped table-hover">
+      <tr>
+        <th class="text-center">Rapat Rim</th>
+        <th class="text-center">Nama panitia</th>
+        <th class="text-center">Stadium</th>
+        <th class="text-center">Tanggal dan Waktu</th>
+        <th class="text-center">Action</th>
+      </tr>
+
+      <tr>
+        <th class="align-middle text-center">A VS B</th>
+        <th class="align-middle text-center">XYZ</th>
+        <th class="align-middle text-center">Stadium GBK</th>
+        <th class="align-middle text-center">5 Juli 2023, 07.00 - 09.00</th>
+        <th class="align-middle text-center"><a href="">Lihat Laporan</a></th>
+      </tr>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <title>Daftar Rapat</title>
@@ -24,4 +52,4 @@
       {% endfor %}
     </table>
   </body>
-</html>
+</html> -->
