@@ -1,43 +1,44 @@
 {% extends "base_authentication.html" %} 
 
 {% block authentication_content %}
-<form action="" class="d-flex flex-column gap-4 align-items-center w-75">
+<form action="/registration" method="post" class="d-flex flex-column gap-4 align-items-center w-75">
+    {% csrf_token %}
     <span class="fw-semibold fs-2">Registration</span>
     <div class="d-flex flex-column gap-3 w-100">
         <div class="d-flex w-100 gap-3">
             <div class="d-flex flex-column gap-2 w-50">
                 <label for="first-name">Nama Depan</label>
-                <input class="form-control" id="first-name" type="text" placeholder="John">
+                <input name="first-name" class="form-control" id="first-name" type="text" placeholder="John">
             </div>
             <div class="d-flex flex-column gap-2 w-50">
                 <label for="last-name">Nama Belakang</label>
-                <input class="form-control" id="last-name" type="text" placeholder="Doe">
+                <input name="last-name" class="form-control" id="last-name" type="text" placeholder="Doe">
             </div>
         </div>
         <div class="d-flex w-100 gap-3">
             <div class="d-flex flex-column gap-2 w-50">
                 <label for="phone-number">No HP</label>
-                <input class="form-control" id="phone-number" type="tel" placeholder="0848567891">
+                <input name="phone-number" class="form-control" id="phone-number" type="tel" placeholder="0848567891">
             </div>
             <div class="d-flex flex-column gap-2 w-50">
                 <label for="address">Alamat</label>
-                <input class="form-control" id="address" type="text" placeholder="Jalan Senang">
+                <input name="address" class="form-control" id="address" type="text" placeholder="Jalan Senang">
             </div>
         </div>
         <div class="d-flex w-100 gap-3">
             <div class="d-flex flex-column gap-2 w-50">
                 <label for="email">Email</label>
-                <input class="form-control" id="email" type="email" placeholder="example@mail.com">
+                <input name="email" class="form-control" id="email" type="email" placeholder="example@mail.com">
             </div>
             <div class="d-flex flex-column gap-2 w-50">
                 <label for="password">Password</label>
-                <input class="form-control" id="password" type="password" placeholder="Masukan Password">
+                <input name="password" class="form-control" id="password" type="password" placeholder="Masukan Password">
             </div>
         </div>
         <div class="d-flex w-100 gap-3">
             <div class="d-flex flex-column gap-2 w-50">
                 <label for="status">Status</label>
-                <select id="status" class="form-select" aria-label="Default select example">
+                <select name="status" id="status" class="form-select" aria-label="Default select example">
                     <option selected>Pilih Status</option>
                     <option value="mahasiswa">mahasiswa</option>
                     <option value="dosen">dosen</option>
@@ -46,24 +47,40 @@
                     <option value="alumni">alumni</option>
                   </select>
             </div>
-            <div class="d-flex flex-column gap-2 w-50">
+            <div onchange="toggleJabatan()" class="d-flex flex-column gap-2 w-50">
                 <label for="role">Role</label>
-                <select id="role" class="form-select" aria-label="Default select example">
+                <select on name="role" id="role" class="form-select" aria-label="Default select example">
                     <option selected>Pilih Role</option>
-                    <option value="manajer">manajer</option>
-                    <option value="penonton">penonton</option>
-                    <option value="panitia">panitia</option>
+                    <option value="MANAJER">manajer</option>
+                    <option value="PENONTON">penonton</option>
+                    <option value="PANITIA">panitia</option>
                 </select>
             </div>
         </div>
-        <div class="d-flex flex-column gap-2 w-100">
+        <div id="jabatan-field" class="flex-column gap-2 w-100" style="display: none;">
             <label for="jabatan">Jabatan</label>
-            <input class="form-control" id="jabatan" type="text" placeholder="Ketua Pelaksana">
+            <input name="jabatan" class="form-control" id="jabatan" type="text" placeholder="Ketua Pelaksana">
         </div>
         <div class="d-flex gap-2 w-100">
-            <button class="btn-secondary btn w-50">Login</button>
+            <a href="/login" class="btn-secondary btn w-50">Login</a>
             <button class="btn-success btn w-50">Register</button>
         </div>
     </div>
 </form>
 {% endblock %}
+
+{% block meta %}
+  <script>
+    function toggleJabatan() {
+        const selectElement = document.getElementById("role");
+        const selectedValue = selectElement.value;
+        const elementToToggle = document.getElementById("jabatan-field");
+
+        if (selectedValue === "PANITIA") {
+          elementToToggle.style.display = "flex";
+        } else {
+          elementToToggle.style.display = "none";
+        }
+      }
+  </script>
+{% endblock  %}
