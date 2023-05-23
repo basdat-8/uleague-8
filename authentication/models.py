@@ -165,7 +165,28 @@ def get_additional_data(id, role):
                     ON "Rapat"."ID_Pertandingan" = P."ID_Pertandingan"
                 JOIN "Stadium" S
                     ON S."ID_Stadium" = P."Stadium"
-                WHERE "Rapat"."Perwakilan_Panitia" = %s
+                WHERE 
+                    "Rapat"."Perwakilan_Panitia" = %s
+                    AND "Datetime" > CURRENT_TIMESTAMP
+                """, [id]
+            )
+        elif role == 'PENONTON':
+            cursor.execute("""
+                SELECT
+                    string_agg("Nama_Tim", ' VS ') AS tim_bertanding,
+                    S."Nama" AS nama_stadium,
+                    "Start_Datetime"
+                FROM "Pembelian_Tiket"
+                JOIN "Pertandingan" P
+                    ON P."ID_Pertandingan" = "Pembelian_Tiket"."ID_Pertandingan"
+                JOIN "Stadium" S
+                    ON S."ID_Stadium" = P."Stadium"
+                JOIN "Tim_Pertandingan" TP
+                    ON P."ID_Pertandingan" = TP."ID_Pertandingan"
+                WHERE
+                    "ID_Penonton" = %s
+                    AND "Start_Datetime" > CURRENT_TIMESTAMP
+                GROUP BY "Nomor_Receipt", S."Nama", "Start_Datetime"
                 """, [id]
             )
         
@@ -178,6 +199,12 @@ def get_additional_data(id, role):
                 data.append({
                     'nama_tim': row[0],
                     'universitas': row[1]
+                })
+            elif role == 'PENONTON':
+                data.append({
+                    'tim_bertanding': row[0],
+                    'stadium': row[1],
+                    'tanggal_bermain': row[2]
                 })
             elif role == 'PANITIA':
                 cursor.execute("""

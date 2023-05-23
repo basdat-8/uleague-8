@@ -49,11 +49,10 @@
                 {% if request.session.role == 'MANAJER'  %}
                     <th class="text-center">Nama Tim</th>
                     <th class="text-center">Universitas</th>
-                {% elif request.session.role == 'PANITIA' %}
+                {% else %}
                     <th class="text-center">Tim Bertanding</th>
                     <th class="text-center">Stadium</th>
                     <th class="text-center">Tanggal & Waktu</th>
-                {% else %}
                 {% endif %}
               
             </tr>
@@ -67,6 +66,9 @@
                     <th class="text-center fw-normal">{{data.stadium}}</th>
                     <th class="text-center fw-normal">{{data.tanggal_rapat}}</th>
                 {% else %}
+                    <th class="text-center fw-normal"><span class="fw-bold">{{data.tim_bermain}}</th>
+                    <th class="text-center fw-normal">{{data.stadium}}</th>
+                    <th class="text-center fw-normal">{{data.tanggal_bermain}}</th>
                 {% endif %}
             </tr>
             {% endfor %}
