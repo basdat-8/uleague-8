@@ -1,0 +1,26 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<div class="d-flex flex-column gap-4 align-items-center justify-content-center w-75 vh-100">
+    <form action="/team/add-coach" method="post" class="d-flex flex-column gap-4 align-items-center w-50">
+        {% csrf_token %}
+        <span class="fw-semibold fs-2">Tambah Pelatih</span>
+        <div class="d-flex flex-column gap-3 w-100">
+            <div class="d-flex flex-column gap-2 w-100">
+                <label for="pelatih">Daftar Pelatih</label>
+                <select name="pelatih_id" id="pelatih" class="form-select" aria-label="Default select example">
+                    <option selected>Pilih pelatih</option>
+                    {% for coach in coaches %}
+                        <option value="{{coach.id}}">{{coach.nama}}</option>
+                    {% endfor %}
+                  </select>
+            </div>
+            <div class="d-flex gap-2 w-100">
+                <a href="/team" class="btn-secondary btn w-50">Cancel</a>
+                <button type="submit" class="btn-success btn w-50">Daftarkan</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
