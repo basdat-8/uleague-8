@@ -129,3 +129,99 @@ def remove_coach(pelatih_id):
             """, 
             [pelatih_id]
         )
+        
+def get_players_by_team(nama_tim):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+                SELECT
+                    "ID_Pemain",
+                    "Nama_Depan" || ' ' || "Nama_Belakang",
+                    "Nomor_HP",
+                    "Tgl_Lahir",
+                    "Is_Captain",
+                    "Posisi",
+                    "NPM",
+                    "Jenjang"
+                FROM "Pemain"
+                JOIN "Tim" T
+                    ON T."Nama_Tim" = "Pemain"."Nama_Tim"
+                WHERE T."Nama_Tim" = %s  
+            """, 
+            [nama_tim]
+        )
+        
+        rows = cursor.fetchall()
+        
+        players = []
+        
+        for row in rows:
+            players.append({
+                "id": row[0],
+                "nama": row[1],
+                "nomor_hp": row[2],
+                "tgl_lahir": row[3],
+                "is_captain": row[4],
+                "posisi": row[5],
+                "npm": row[6],
+                "jenjang": row[7]
+            })
+            
+        return players
+
+def promote_player(id):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+                UPDATE "Pemain"
+                SET "Is_Captain" = 'True'
+                WHERE "ID_Pemain" = %s
+            """,
+            [id]
+        )
+        
+def remove_player(id):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+                UPDATE "Pemain"
+                SET "Nama_Tim" = NULL
+                WHERE "ID_Pemain" = %s
+            """, 
+            [id]
+        )    
+
+def get_players():
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+                SELECT
+                    "ID_Pemain",
+                    "Pemain"."Nama_Depan" || ' ' || "Pemain"."Nama_Belakang" || ' - ' || "Posisi"
+                FROM "Pemain"
+                WHERE "Nama_Tim" IS NULL
+            """
+        )
+        
+        rows = cursor.fetchall()
+        
+        players = []
+        
+        for row in rows:
+            players.append({
+                "id": row[0],
+                "nama": row[1],
+            })
+        
+        return players 
+    
+def add_player(pemain_id, nama_tim):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+                UPDATE "Pemain"
+                SET "Nama_Tim" = %s
+                WHERE "ID_Pemain" = %s
+            """, 
+            [nama_tim, pemain_id]
+        )
