@@ -1,9 +1,5 @@
 from django.urls import path
-<<<<<<< HEAD
-from manager.views import show_team_registration_page, show_team_page, show_add_player_page, show_add_trainer_page, show_stadium_page, show_rent_stadium_page, show_history_page, show_listmatch_page
-=======
-from manager.views import show_team_registration_page, show_team_page, show_add_player_page, show_add_coach_page, show_stadium_page, show_rent_stadium_page
->>>>>>> d333664148efca0f31741982405d8a4a3d1e1db1
+from manager.views import show_history_page, show_listmatch_page, show_team_registration_page, show_team_page, show_add_player_page, show_add_coach_page, show_stadium_page, show_rent_stadium_page, 
 
 app_name = 'manager'
 
