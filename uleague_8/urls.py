@@ -22,4 +22,6 @@ urlpatterns = [
     path('', include('manager.urls')),
     # path('', include('history.urls')),
     path('', include('committee.urls'))
+    path('',include('dashboard.urls')),
+    path('', include('history.urls'))
 ]

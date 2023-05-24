@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Dashboard</h1>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Profile</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Nama Depan</td>
+            <td>{{ user.profile.first_name }}</td>
+          </tr>
+          <tr>
+            <td>Nama Belakang</td>
+            <td>{{ user.profile.last_name }}</td>
+          </tr>
+          <tr>
+            <td>Nomor HP</td>
+            <td>{{ user.profile.phone_number }}</td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>{{ user.profile.email }}</td>
+          </tr>
+          <tr>
+            <td>Alamat</td>
+            <td>{{ user.profile.address }}</td>
+          </tr>
+          <tr>
+            <td>Status</td>
+            <td>{{ user.profile.get_status_display }}</td>
+          </tr>
+          <tr>
+            <td>Jabatan</td>
+            <td>{{ user.profile.position }}</td>
+          </tr>
+          <tr>
+            <td>Tim</td>
+            <td>
+              {% if team %}
+                {{ team.name }}
+              {% else %}
+                Belum Membuat Tim
+              {% endif %}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
