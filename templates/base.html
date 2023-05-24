@@ -35,7 +35,7 @@
             </li>
             {% if request.session.role == 'MANAJER' %}
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/"
+                <a class="nav-link" aria-current="page" href="/team"
                   >Mengelola Tim</a
                 >
               </li>
@@ -90,7 +90,7 @@
       </div>
     </nav>
     {% endif %}
-    <div class="w-100 d-flex justify-content-center align-items-center">
+    <div class="w-100 vh-100 d-flex justify-content-center">
       {% block content %} {% endblock content %}
     </div>
   </body>
