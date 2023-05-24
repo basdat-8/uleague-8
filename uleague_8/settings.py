@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'authentication',
     'manager',
     # 'history',
-    'committee'
+    'committee',
     'dashboard',
     'history'
 ]
