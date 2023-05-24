@@ -5,84 +5,54 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %} 
-    
-    {% block meta %} {% endblock meta %}
+    {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %} {% block meta %} {% endblock meta %}
   </head>
 
   <body>
     {% if request.session.username is not none %}
-    <nav class="navbar navbar-expand-lg position-fixed w-100" style="background-color: #e3f2fd;">
+    <nav class="navbar navbar-expand-lg position-fixed w-100" style="background-color: #e3f2fd">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">U League</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/"
-                >Dashboard</a
-              >
+              <a class="nav-link" aria-current="page" href="/">Dashboard</a>
             </li>
             {% if request.session.role == 'MANAJER' %}
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/"
-                  >Mengelola Tim</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/"
-                  >Peminjaman Stadium</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/"
-                  >List Pertandingan</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/"
-                  >History Rapat</a
-                >
-              </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Mengelola Tim</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Peminjaman Stadium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'manager:show_listmatch_page' %}">List Pertandingan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'manager:show_history_page' %}">History Rapat</a>
+            </li>
             {% elif request.session.role == 'PENONTON' %}
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/"
-                  >Pembelian Tiket</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/"
-                  >List Pertandingan</a
-                >
-              </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Pembelian Tiket</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'manager:show_listmatch_page' %}">List Pertandingan</a>
+            </li>
             {% else %}
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/"
-                  >Rapat</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/"
-                  >Manage Pertangdingan</a
-                >
-              </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Rapat</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Manage Pertangdingan</a>
+            </li>
             {% endif %}
             <li class="nav-item">
               <form method="post" action="/logout">
                 {% csrf_token %}
-                <button class="btn btn-danger">
-                  Logout
-                </button>
+                <button class="btn btn-danger">Logout</button>
               </form>
             </li>
           </ul>
@@ -90,8 +60,6 @@
       </div>
     </nav>
     {% endif %}
-    <div class="w-100 d-flex justify-content-center align-items-center">
-      {% block content %} {% endblock content %}
-    </div>
+    <div class="w-100 d-flex justify-content-center align-items-center">{% block content %} {% endblock content %}</div>
   </body>
 </html>
