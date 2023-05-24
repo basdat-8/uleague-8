@@ -2,20 +2,21 @@
 
 {% block content %}
 <div class="d-flex flex-column gap-4 align-items-center justify-content-center w-75 vh-100">
-    <form action="" class="d-flex flex-column gap-4 align-items-center w-50">
+    <form method="post" action="/team/registration" class="d-flex flex-column gap-4 align-items-center w-50">
+        {% csrf_token %}
         <span class="fw-semibold fs-2">Registrasi Tim</span>
         <div class="d-flex flex-column gap-3 w-100">
             <div class="d-flex flex-column gap-2 w-100">
                 <label for="nama-tim">Nama Tim</label>
-                <input class="form-control" id="nama-tim" type="text" placeholder="Nankatsu">
+                <input name="nama" class="form-control" id="nama-tim" type="text" placeholder="Nankatsu">
             </div>
             <div class="d-flex flex-column gap-2 w-100">
                 <label for="universitas">Universitas</label>
-                <input class="form-control" id="universitas" type="text" placeholder="Universitas Indonesia">
+                <input name="universitas" class="form-control" id="universitas" type="text" placeholder="Universitas Indonesia">
             </div>
             <div class="d-flex gap-2 w-100">
-                <button class="btn-secondary btn w-50">Cancel</button>
-                <button class="btn-success btn w-50">Daftarkan</button>
+                <a href="/" class="btn-secondary btn w-50">Cancel</a>
+                <button type="submit" class="btn-success btn w-50">Daftarkan</button>
             </div>
         </div>
     </form>
