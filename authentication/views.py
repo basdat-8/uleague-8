@@ -30,7 +30,6 @@ def show_dashboard_page(request):
     additional_data = get_additional_data(id=user["id"], role=role)
     
     context = {
-        "user": user,
         "additional_data": additional_data
     }
     

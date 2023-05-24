@@ -22,18 +22,26 @@
               <a class="nav-link" aria-current="page" href="/">Dashboard</a>
             </li>
             {% if request.session.role == 'MANAJER' %}
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/">Mengelola Tim</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/">Peminjaman Stadium</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{% url 'manager:show_listmatch_page' %}">List Pertandingan</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{% url 'manager:show_history_page' %}">History Rapat</a>
-            </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/team"
+                  >Mengelola Tim</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/"
+                  >Peminjaman Stadium</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/"
+                  >List Pertandingan</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/"
+                  >History Rapat</a
+                >
+              </li>
             {% elif request.session.role == 'PENONTON' %}
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="/">Pembelian Tiket</a>
@@ -42,12 +50,25 @@
               <a class="nav-link" aria-current="page" href="{% url 'manager:show_listmatch_page' %}">List Pertandingan</a>
             </li>
             {% else %}
+<<<<<<< HEAD
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="/">Rapat</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="/">Manage Pertangdingan</a>
             </li>
+=======
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/"
+                  >Rapat</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/"
+                  >Manage Pertandingan</a
+                >
+              </li>
+>>>>>>> d333664148efca0f31741982405d8a4a3d1e1db1
             {% endif %}
             <li class="nav-item">
               <form method="post" action="/logout">
@@ -60,6 +81,12 @@
       </div>
     </nav>
     {% endif %}
+<<<<<<< HEAD
     <div class="w-100 d-flex justify-content-center align-items-center">{% block content %} {% endblock content %}</div>
+=======
+    <div class="w-100 vh-100 d-flex justify-content-center">
+      {% block content %} {% endblock content %}
+    </div>
+>>>>>>> d333664148efca0f31741982405d8a4a3d1e1db1
   </body>
 </html>

@@ -130,7 +130,7 @@ def get_user_by_role(username, role):
             row = cursor.fetchone()
             
             user = {
-                'id': row[0],
+                'id': str(row[0]),
                 'nama_depan': row[1],
                 'nama_belakang': row[2],
                 'nomor_hp': row[3],
@@ -144,7 +144,6 @@ def get_user_by_role(username, role):
 
 def get_additional_data(id, role):
     with connection.cursor() as cursor:
-        
         if role == 'MANAJER':
             cursor.execute("""
                 SELECT TM."Nama_Tim", "Universitas" FROM "Tim"
