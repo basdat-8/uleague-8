@@ -26,11 +26,10 @@ def show_dashboard_page(request):
     username = request.session['username']
     role = request.session['role']
     
-    user  = get_user_by_role(username=username, role=role)
-    additional_data = get_additional_data(id=user["id"], role=role)
+    request.session['user'] = get_user_by_role(username=username, role=role)
+    additional_data = get_additional_data(id=request.session['user'].get('id'), role=role)
     
     context = {
-        "user": user,
         "additional_data": additional_data
     }
     

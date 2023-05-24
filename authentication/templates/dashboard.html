@@ -10,7 +10,7 @@
             <div class="fw-bold">Email</div>
             <div class="fw-bold">Alamat</div>
             <div class="fw-bold">Status</div>
-            {% if user.jabatan is not None %}
+            {% if request.session.user.jabatan is not None %}
             <div div class="fw-bold">Jabatan</div>
             {% endif %}
             </div>
@@ -20,18 +20,18 @@
             <div>:</div>
             <div>:</div>
             <div>:</div>
-            {% if user.jabatan is not None %}
+            {% if request.session.user.jabatan is not None %}
             <div>:</div>
             {% endif %}
             </div>
             <div class="d-flex flex-column gap-2">
-            <div>{{ user.nama_depan }} {{ user.nama_belakang }}</div>
-            <div>{{ user.nomor_hp }}</div>
-            <div>{{ user.email }}</div>
-            <div>{{ user.alamat }}</div>
-            <div>{{ user.status }}</div>
-            {% if user.jabatan is not None %}
-            <div>{{ user.jabatan }}</div>
+            <div>{{ request.session.user.nama_depan }} {{ request.session.user.nama_belakang }}</div>
+            <div>{{ request.session.user.nomor_hp }}</div>
+            <div>{{ request.session.user.email }}</div>
+            <div>{{ request.session.user.alamat }}</div>
+            <div>{{ request.session.user.status }}</div>
+            {% if request.session.user.jabatan is not None %}
+            <div>{{ request.session.user.jabatan }}</div>
             {% endif %}
             </div>
         </div>
