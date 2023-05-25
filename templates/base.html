@@ -22,42 +22,32 @@
               <a class="nav-link" aria-current="page" href="/">Dashboard</a>
             </li>
             {% if request.session.role == 'MANAJER' %}
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/team"
-                  >Mengelola Tim</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/stadium"
-                  >Peminjaman Stadium</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'manager:show_listmatch_page' %}">List Pertandingan</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'manager:show_history_page' %}">History Rapat</a>
-              </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/team">Mengelola Tim</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/stadium">Peminjaman Stadium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'manager:show_listmatch_page' %}">List Pertandingan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'manager:show_history_page' %}">History Rapat</a>
+            </li>
             {% elif request.session.role == 'PENONTON' %}
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/ticket"
-                  >Pembelian Tiket</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'manager:show_listmatch_page' %}">List Pertandingan</a>
-              </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/ticket">Pembelian Tiket</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'manager:show_listmatch_page' %}">List Pertandingan</a>
+            </li>
             {% else %}
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/meeting"
-                  >Rapat</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/"
-                  >Manage Pertandingan</a
-                >
-              </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/meeting">Rapat</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Manage Pertandingan</a>
+            </li>
             {% endif %}
             <li class="nav-item">
               <form method="post" action="/logout">
