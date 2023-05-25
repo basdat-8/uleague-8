@@ -6,9 +6,7 @@ def show_match_page(request):
     return render(request, 'match_page.html')
 
 def show_match_list_page(request):
-    matches = [
-      
-    ]
+    matches = show_all_tim_bertanding()
  
     context = {
         "matches": matches
@@ -25,7 +23,7 @@ def show_create_match_page(request):
     stadiums = get_all_stadium()
     referees = get_all_wasit()
     teams = get_all_team()
-        
+
     if request.method == 'POST':
         create_pertandingan(request.POST)
         return redirect('/match/list')

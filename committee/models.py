@@ -195,7 +195,7 @@ def create_pertandingan(payload):
             cursor.execute(
                 """
                     INSERT INTO public."Tim_Pertandingan" ("Nama_Tim", "ID_Pertandingan", "Skor") 
-                    VALUES (%s, %s, '0')
+                    VALUES (%s, %s, '   0')
                 """,
                 [tim_2, id_pertandingan]
                  )
@@ -204,3 +204,23 @@ def create_pertandingan(payload):
         except Exception as e:
             cursor.execute('ROLLBACK;')
             raise e
+        
+def show_all_tim_bertanding():
+    with connection.cursor() as cursor:
+        cursor.execute("""
+        SELECT STRING_AGG(tm."Nama_Tim", ' vs ') AS tim_bertanding, p."Start_Datetime" ||' - '|| p."End_Datetime" as waktu
+    FROM "Tim_Pertandingan" AS tm join "Pertandingan" AS p on tm."ID_Pertandingan" = p."ID_Pertandingan"
+    GROUP BY (tm."ID_Pertandingan", waktu)
+    ORDER BY (tim_bertanding);
+        """)
+        rows = cursor.fetchall()
+        tim_bertandings = []
+
+        for row in rows:
+            tim_bertandings.append(
+                {
+                'Nama': row[0],
+                'Waktu': row[1],
+            }
+            )
+        return tim_bertandings
