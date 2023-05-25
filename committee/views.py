@@ -47,3 +47,11 @@ def show_meeting_list_page(request):
 
 def show_create_meeting_page(request):
     return render(request, 'create_meeting.html')
+
+def delete_match(request, id):
+    if not "username" in request.session:
+        return redirect('/login')
+    if request.session["role"] != "PANITIA":
+        return redirect('/')
+    delete_page_by_id(id)
+    return redirect('/match/list')

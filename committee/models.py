@@ -204,11 +204,43 @@ def create_pertandingan(payload):
         except Exception as e:
             cursor.execute('ROLLBACK;')
             raise e
-        
+
+def delete_page_by_id(id):
+    with connection.cursor() as cursor:
+        cursor.execute("""
+        DELETE FROM "Peristiwa"
+        WHERE "ID_Pertandingan" = %s;
+        """, [id])
+
+        cursor.execute("""
+        DELETE FROM "Wasit_Bertugas"
+        WHERE "ID_Pertandingan" = %s;
+        """, [id])
+
+        cursor.execute("""
+        DELETE FROM "Pembelian_Tiket"
+        WHERE "ID_Pertandingan" = %s;
+        """, [id])
+
+        cursor.execute("""
+        DELETE FROM "Tim_Pertandingan"
+        WHERE "ID_Pertandingan" = %s;
+        """, [id])
+
+        cursor.execute("""
+        DELETE FROM "Rapat"
+        WHERE "ID_Pertandingan" = %s;
+        """, [id])
+
+        cursor.execute("""
+        DELETE FROM "Pertandingan"
+        WHERE "ID_Pertandingan" = %s;
+        """, [id])
+
 def show_all_tim_bertanding():
     with connection.cursor() as cursor:
         cursor.execute("""
-        SELECT STRING_AGG(tm."Nama_Tim", ' vs ') AS tim_bertanding, p."Start_Datetime" ||' - '|| p."End_Datetime" as waktu
+        SELECT STRING_AGG(tm."Nama_Tim", ' vs ') AS tim_bertanding, p."Start_Datetime" ||' - '|| p."End_Datetime" as waktu, tm."ID_Pertandingan"
     FROM "Tim_Pertandingan" AS tm join "Pertandingan" AS p on tm."ID_Pertandingan" = p."ID_Pertandingan"
     GROUP BY (tm."ID_Pertandingan", waktu)
     ORDER BY (tim_bertanding);
@@ -221,6 +253,7 @@ def show_all_tim_bertanding():
                 {
                 'Nama': row[0],
                 'Waktu': row[1],
+                'Id' : row[2]
             }
             )
         return tim_bertandings

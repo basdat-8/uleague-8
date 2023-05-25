@@ -10,12 +10,16 @@
             <tr>
                 <th class="text-center">Pertandingan</th>
                 <th class="text-center">Waktu Pertandingan</th>
+                <th class="text-center">Action</th>
             </tr>
         
             {% for match in matches %}
             <tr>
                 <th class="align-middle">{{match.Nama}}</th>
                 <th class="align-middle">{{match.Waktu}}</th>
+                <th>
+                    <a href="/match/delete/{{match.Id}}">delete</a>
+                </th>
             </tr>
             {% endfor %}
         </table>
