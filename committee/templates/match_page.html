@@ -14,19 +14,25 @@
                 <th class="text-center">Pemenang</th>
                 <th class="text-center">Action</th>
             </tr>
-        
+
+            {% for match in matches %}
             <tr>
-                <th class="align-middle text-center">A</th>
-                <th class="align-middle text-center">A VS D</th>
-                <th class="align-middle text-center">28 Mei 2023, 13:00</th>
-                <th class="align-middle text-center">A</th>
+                <th class="align-middle">{{match.Nama}}</th>
+                <th class="align-middle">{{match.Waktu}}</th>
+
+                <th class="align-middle text-center">A{{match.Nama}}</th>
+                <th class="align-middle text-center">A VS D{{match.Nama}}</th>
+                <th class="align-middle text-center">28 Mei 2023, 13:00{{match.Waktu}}</th>
+                <th class="align-middle text-center">A{{match.}}</th>
                 <th class="align-middle text-center">
                     <div class="d-flex flex-column gap-2">
-                        <a href="">Lihat Perristiwa 1</a>
-                        <a href="">Lihat Perristiwa 2</a>
+                        <a href="">Lihat Peristiwa Tim 1</a>
+                        <a href="">Lihat Peristiwa Tim 2</a>
                     </div>
                 </th>
             </tr>
+            {% endfor %}
+
         </table>
     </div>
 </div>

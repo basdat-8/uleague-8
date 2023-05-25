@@ -11,31 +11,37 @@
             <tr>
                 <th class="text-center">Nama Pemain</th>
                 <th class="text-center">Peristiwa</th>
+                <th class="text-center">Waktu</th>
             </tr>
         
             <tr>
                 <th class="align-middle text-center">
                     <select id="status" class="form-select" aria-label="Default select example">
                     <option selected>Pilih Pemain</option>
-                    <option value="mahasiswa">mahasiswa</option>
-                    <option value="dosen">dosen</option>
-                    <option value="tendik">tendik</option>
-                    <option value="umum">umum</option>
-                    <option value="alumni">alumni</option>
+
+                    {% for player in players %}
+                    <option value="{{player.nama}}">{{player.nama}}</option>
+                    {% endfor %}
+
                   </select>
                 </th>
                 <th class="align-middle text-center">
                     <select id="status" class="form-select" aria-label="Default select example">
                     <option selected>Pilih Peristiwa</option>
-                    <option value="mahasiswa">mahasiswa</option>
-                    <option value="dosen">dosen</option>
-                    <option value="tendik">tendik</option>
-                    <option value="umum">umum</option>
-                    <option value="alumni">alumni</option>
+                    <option value="kuning">kuning</option>
+                    <option value="merah">merah</option>
+                    <option value="assist">assist</option>
+                    <option value="gol">gol</option>
                   </select>
-                </th>            
+                </th>
+                <th>
+                    <input name="start_date" class="form-control" id="tanggal_mulai" type="date">
+                </th>
             </tr>
         </table>
+        <div>
+            <button type="submit" class="btn-success btn w-50">Submit</button>
+        </div>
     </div>
 </div>
 
