@@ -14,14 +14,16 @@
                 <th class="text-center">Action</th>
             </tr>
         
+            {% for match in matches %}
             <tr>
-                <th class="align-middle text-center">A VS B</th>
-                <th class="align-middle text-center">Stadium GBK</th>
-                <th class="align-middle text-center">5 Juli 2023, 07.00 - 09.00</th>
+                <th class="align-middle text-center">{{ match.tim_bertanding }}</th>
+                <th class="align-middle text-center">{{ match.name }}</th>
+                <th class="align-middle text-center">{{ match.dateTime }}</th>
                 <th class="align-middle text-center">
-                    <a href="">Mulai Rapat</a>
+                    <a href="/meeting/create/{{match.id_pertandingan}}">Mulai Rapat</a>
                 </th>
             </tr>
+            {% endfor %}
         </table>
     </div>
 </div>

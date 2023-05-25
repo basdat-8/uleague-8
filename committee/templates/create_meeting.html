@@ -2,14 +2,16 @@
 
 {% block content %}
 <div class="d-flex flex-column gap-4 align-items-center justify-content-center w-75 py-5">
-    <form action="" class="d-flex flex-column gap-4 align-items-center w-100">
+    <form method="post" action="/meeting/create/{{pertandingan_id}}" class="d-flex flex-column gap-4 align-items-center w-100">
+        {% csrf_token %}
         <span class="fw-semibold fs-2">Rapat Pertandingan A vs B</span>
         <div class="d-flex flex-column gap-3 w-50 align-items-center">
-            <div class="d-flex flex-column gap-2 w-50">
-                <label for="first-name">Isi Rapat</label>
-                <textarea class="form-control" id="first-name" type="text" placeholder="John"></textarea>
+            <div class="d-flex flex-column gap-2 w-100">
+                <label for="isi-rapat">Isi Rapat</label>
+                <textarea name="isi_rapat" class="form-control" id="isi-rapat" type="text" placeholder="{% lorem 1 b random %}"></textarea>
             </div>
             <div class="d-flex gap-2 w-100 justify-content-center">
+                <a href="/meeting" class="btn-secondary btn w-50">Cancel</a>
                 <button class="btn-success btn w-50">Submit</button>
             </div>
         </div>
