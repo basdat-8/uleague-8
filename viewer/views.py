@@ -23,6 +23,3 @@ def show_buy_ticket_choose_stadium(request, pertandingan_id):
     }
     
     return render(request, 'buy_ticket.html', context)
-
-def show_buy_ticket_matches(request):
-    return render(request, 'matches.html')
