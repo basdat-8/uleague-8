@@ -44,8 +44,7 @@ INSTALLED_APPS = [
     'manager',
     # 'history',
     'committee',
-    'dashboard',
-    'history'
+    'dashboard'
 ]
 
 MIDDLEWARE = [

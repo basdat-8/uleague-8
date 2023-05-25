@@ -65,7 +65,7 @@ def show_listmatch_page(request):
             cursor.execute("set search_path to public")
             cursor.execute('''
                 SELECT array_to_string(array_agg("Tim_Pertandingan"."Nama_Tim"),' VS ') as tim_bertanding, "Pertandingan"."Start_Datetime" as tanggal_dan_waktu, "Stadium"."Nama" as nama_stadium
-                from "Pertandingan", "Tim_Pertandingan", "Stadium"
+                FROM "Pertandingan", "Tim_Pertandingan", "Stadium"
                 WHERE "Tim_Pertandingan"."ID_Pertandingan" = "Pertandingan"."ID_Pertandingan" 
                     AND "Pertandingan"."Stadium" = "Stadium"."ID_Stadium"
                 GROUP BY "Pertandingan"."Start_Datetime", "Stadium"."Nama"
@@ -110,18 +110,29 @@ def show_history_page(request):
     with connection.cursor() as cursor:
         cursor.execute("set search_path to public")
         cursor.execute('''
-            SELECT array_to_string(array_agg("Tim_Pertandingan"."Nama_Tim"), ' VS ') AS rapat_tim, "Panitia"."Username" AS nama_panitia, "Stadium"."Nama" AS nama_stadium, "Pertandingan"."Start_Datetime" AS tanggal_dan_waktu
+            SELECT array_to_string(array_agg("Tim_Pertandingan"."Nama_Tim"), ' VS ') AS rapat_tim, "Panitia"."Username" AS nama_panitia, "Stadium"."Nama" AS nama_stadium, "Pertandingan"."Start_Datetime" AS tanggal_dan_waktu, "Rapat". "ID_Pertandingan" as id
             FROM "Rapat", "Panitia", "Tim_Pertandingan", "Stadium", "Pertandingan"
             WHERE "Tim_Pertandingan"."ID_Pertandingan" = "Rapat"."ID_Pertandingan" 
                 AND "Pertandingan"."ID_Pertandingan" = "Rapat"."ID_Pertandingan" 
                 AND "Pertandingan"."Stadium" = "Stadium"."ID_Stadium"
                 AND "Rapat"."Perwakilan_Panitia" = "Panitia"."ID_Panitia"
-            GROUP BY "Pertandingan"."Start_Datetime", "Stadium"."Nama", "Panitia"."Username"
+            GROUP BY "Pertandingan"."Start_Datetime", "Stadium"."Nama", "Panitia"."Username",  "Rapat". "ID_Pertandingan"
             ORDER BY "Pertandingan"."Start_Datetime";
         ''')
         row = dictfetchall(cursor)
     context = {'row': row}
     return render(request, 'history_rapat.html', context)
+
+def show_laporan_page(request, id):
+    with connection.cursor() as cursor:
+        cursor.execute("set search_path to public")
+        cursor.execute('''
+            SELECT "Rapat"."Isi_Rapat" as isi_laporan FROM "Rapat"
+            WHERE "Rapat"."ID_Pertandingan" = %s
+        ''', [id])
+        row = dictfetchall(cursor)
+    context = {'row': row}
+    return render(request, 'laporan_rapat.html', context)
 
 def dictfetchall(cursor):
     "Returns all rows from a cursor as a dict"
