@@ -225,3 +225,62 @@ def add_player(pemain_id, nama_tim):
             """, 
             [nama_tim, pemain_id]
         )
+        
+def get_stadiums():
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+                SELECT "ID_Stadium", "Nama" FROM "Stadium"
+            """
+        )
+        
+        rows = cursor.fetchall()
+        
+        stadiums = []
+        
+        for row in rows:
+            stadiums.append({
+                "id": row[0],
+                "nama": row[1]
+            })
+            
+        return stadiums
+    
+def rent_stadium(payload, manajer_id):
+    stadium_id = payload['stadium_id']
+    start_date = payload['start_date']
+    end_date = payload['end_date']
+    
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+                INSERT INTO "Peminjaman" ("ID_Manajer", "Start_Datetime", "End_Datetime", "ID_Stadium")
+                VALUES (%s, %s, %s, %s)
+            """, 
+            [manajer_id, start_date, end_date, stadium_id]
+        )
+        
+def get_rented_stadium(manajer_id):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+                SELECT "Nama", "Start_Datetime" || ' - ' || "End_Datetime" FROM "Peminjaman"
+                JOIN "Stadium" S
+                    ON S."ID_Stadium" = "Peminjaman"."ID_Stadium"
+                WHERE
+                    "ID_Manajer" = %s
+            """, 
+            [manajer_id]
+        )
+        
+        rows = cursor.fetchall()
+        
+        stadiums = []
+        
+        for row in rows:
+            stadiums.append({
+                "name": row[0],
+                "date": row[1]
+            })
+            
+        return stadiums

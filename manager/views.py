@@ -3,9 +3,7 @@ from django.shortcuts import redirect, render
 from manager.models import *
 
 def show_stadium_page(request):
-    stadiums = [
-      
-    ]
+    stadiums = get_rented_stadium(request.session['user'].get('id'))
  
     context = {
         "stadiums": stadiums
@@ -14,12 +12,14 @@ def show_stadium_page(request):
     return render(request, 'stadium.html', context)
 
 def show_rent_stadium_page(request):
-    stadium_schedules = [
-      
-    ]
+    if request.method == "POST":
+        rent_stadium(request.POST, request.session['user'].get('id'))
+        return redirect('/stadium')
+    
+    stadiums = get_stadiums()
  
     context = {
-        "stadium_schedules": stadium_schedules
+        "stadiums": stadiums
     }
     
     return render(request, 'rent_stadium.html', context)
