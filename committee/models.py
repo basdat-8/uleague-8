@@ -6,21 +6,21 @@ from django.utils import timezone
 def get_matches():
     with connection.cursor() as cursor:
         cursor.execute("""
-        SELECT
-            "Pertandingan"."ID_Pertandingan",
-            string_agg("Nama_Tim", ' VS '),
-            "Nama",
-            "Start_Datetime",
-            "End_Datetime"
-        FROM "Pertandingan"
-        LEFT OUTER JOIN "Rapat" R
-            ON "Pertandingan"."ID_Pertandingan" = R."ID_Pertandingan"
-        JOIN "Tim_Pertandingan"
-            ON "Pertandingan"."ID_Pertandingan" = "Tim_Pertandingan"."ID_Pertandingan"
-        JOIN "Stadium"
-            ON "Pertandingan"."Stadium" = "Stadium"."ID_Stadium"
-        WHERE R."ID_Pertandingan" IS NULL
-        GROUP BY "Pertandingan"."ID_Pertandingan", "Nama", "Start_Datetime", "End_Datetime";               
+            SELECT
+                "Pertandingan"."ID_Pertandingan",
+                string_agg("Nama_Tim", ' VS '),
+                "Nama",
+                "Start_Datetime",
+                "End_Datetime"
+            FROM "Pertandingan"
+            LEFT OUTER JOIN "Rapat" R
+                ON "Pertandingan"."ID_Pertandingan" = R."ID_Pertandingan"
+            JOIN "Tim_Pertandingan"
+                ON "Pertandingan"."ID_Pertandingan" = "Tim_Pertandingan"."ID_Pertandingan"
+            JOIN "Stadium"
+                ON "Pertandingan"."Stadium" = "Stadium"."ID_Stadium"
+            WHERE R."ID_Pertandingan" IS NULL
+            GROUP BY "Pertandingan"."ID_Pertandingan", "Nama", "Start_Datetime", "End_Datetime";               
         """)
         
         rows = cursor.fetchall()

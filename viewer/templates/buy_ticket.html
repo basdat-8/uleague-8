@@ -2,12 +2,13 @@
 
 {% block content %}
 <div class="d-flex flex-column gap-4 align-items-center justify-content-center w-75 vh-100">
-    <form action="" class="d-flex flex-column gap-4 align-items-center w-50">
+    <form action="/ticket/{{pertandingan_id}}/buy" method="post" class="d-flex flex-column gap-4 align-items-center w-50">
+        {% csrf_token %}
         <span class="fw-semibold fs-2">Beli Tiket</span>
         <div class="d-flex flex-column gap-3 w-100">
             <div class="d-flex flex-column gap-2 w-100">
-                <label for="nama-tim">Jenis Tiket</label>
-                <select id="stadium" class="form-select" aria-label="Default select example">
+                <label for="jenis_tiket">Jenis Tiket</label>
+                <select name="jenis_tiket" id="jenis_tiket" class="form-select" aria-label="Default select example">
                     <option selected>Pilih Jenis Tiket</option>
                     <option value="VIP">VIP</option>
                     <option value="Main East">Main East</option>
@@ -16,8 +17,8 @@
                   </select>
             </div>
             <div class="d-flex flex-column gap-2 w-100">
-                <label for="universitas">Pembayaran</label>
-                <select id="stadium" class="form-select" aria-label="Default select example">
+                <label for="pembayaran">Pembayaran</label>
+                <select name="pembayaran" id="pembayaran" class="form-select" aria-label="Default select example">
                     <option selected>Pilih pembayaran</option>
                     <option value="PayPal">PayPal</option>
                     <option value="cc">Kartu Kredit</option>
@@ -26,7 +27,7 @@
                   </select>
             </div>
             <div class="d-flex gap-2 w-100">
-                <button class="btn-secondary btn w-50">Cancel</button>
+                <a href="/ticket" class="btn-secondary btn w-50">Cancel</a>
                 <button class="btn-success btn w-50">Beli</button>
             </div>
         </div>
