@@ -10,7 +10,4 @@ urlpatterns = [
     path('team/registration', show_team_registration_page, name='show_team_registration_page'),
     path('stadium', show_stadium_page, name='show_stadium_page'),
     path('stadium/rent', show_rent_stadium_page, name='show_rent_stadium_page'),
-    path('listmatch', show_listmatch_page, name='show_listmatch_page'),
-    path('history', show_history_page, name='show_history_page'),
-    path('history/laporan/<uuid:id>', show_laporan_page, name='show_laporan_page')
 ]

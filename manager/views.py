@@ -1,12 +1,10 @@
 from django.shortcuts import redirect, render
 from django.db import connection
 
-from manager.models import add_coach, create_manager_team, get_manager_team, get_coaches, get_coaches_by_team, remove_coach
+from manager.models import *
 
 def show_stadium_page(request):
-    stadiums = [
-      
-    ]
+    stadiums = get_rented_stadium(request.session['user'].get('id'))
  
     context = {
         "stadiums": stadiums
@@ -15,12 +13,14 @@ def show_stadium_page(request):
     return render(request, 'stadium.html', context)
 
 def show_rent_stadium_page(request):
-    stadium_schedules = [
-      
-    ]
+    if request.method == "POST":
+        rent_stadium(request.POST, request.session['user'].get('id'))
+        return redirect('/stadium')
+    
+    stadiums = get_stadiums()
  
     context = {
-        "stadium_schedules": stadium_schedules
+        "stadiums": stadiums
     }
     
     return render(request, 'rent_stadium.html', context)
@@ -57,7 +57,23 @@ def show_add_coach_page(request):
     return render(request, 'add_coach.html',context)
 
 def show_add_player_page(request):
-    return render(request, 'add_player.html')
+    if not "username" in request.session:
+        return redirect('/login')
+    if request.session["role"] != "MANAJER":
+        return redirect('/')
+    
+    if request.method == 'POST':
+        team = get_manager_team(request.session['user'].get('id'))
+        add_player(request.POST['pemain_id'], team['nama'])
+        return redirect('/team')
+    
+    players = get_players()
+    
+    context = {
+        "players": players
+    }
+    
+    return render(request, 'add_player.html', context)
 
 def show_listmatch_page(request):
     if request.session['role'] == 'PENONTON' or request.session['role'] == 'MANAJER':
@@ -84,10 +100,14 @@ def show_team_page(request):
     
     if request.method == "POST":
         if request.POST['_method'] == 'DELETE':
-            type = request.POST['type']
-            if type == "COACH":
+            if request.POST['type'] == "COACH":
                 remove_coach(request.POST['id'])
-     
+            else: 
+                remove_player(request.POST['id'])
+        if request.POST['_method'] == 'PATCH':
+            if request.POST['type'] == "PLAYER":
+                promote_player(request.POST['id'])
+                
     team = get_manager_team(request.session['user'].get('id'))
     
     if len(team) == 0:
@@ -95,9 +115,7 @@ def show_team_page(request):
     
     coaches = get_coaches_by_team(team['nama'])
     
-    players = [
-        
-    ]
+    players = get_players_by_team(team['nama'])
     
     context = {
         "players": players,

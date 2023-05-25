@@ -10,5 +10,5 @@ urlpatterns = [
     path('match/event', show_event_page, name='show_event_page'),
     path('match/event/list', show_event_list_page, name='show_event_list_page'),
     path('meeting', show_meeting_list_page, name='show_meeting_list_page'),
-    path('meeting/create', show_create_meeting_page, name='show_create_meeting_page'),
+    path('meeting/create/<str:pertandingan_id>', show_create_meeting_page, name='show_create_meeting_page'),
 ]

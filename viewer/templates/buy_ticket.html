@@ -1,0 +1,37 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<div class="d-flex flex-column gap-4 align-items-center justify-content-center w-75 vh-100">
+    <form action="/ticket/{{pertandingan_id}}/buy" method="post" class="d-flex flex-column gap-4 align-items-center w-50">
+        {% csrf_token %}
+        <span class="fw-semibold fs-2">Beli Tiket</span>
+        <div class="d-flex flex-column gap-3 w-100">
+            <div class="d-flex flex-column gap-2 w-100">
+                <label for="jenis_tiket">Jenis Tiket</label>
+                <select name="jenis_tiket" id="jenis_tiket" class="form-select" aria-label="Default select example">
+                    <option selected>Pilih Jenis Tiket</option>
+                    <option value="VIP">VIP</option>
+                    <option value="Main East">Main East</option>
+                    <option value="Kategori 1">Kategori 1</option>
+                    <option value="Kategori 2">Kategori 2</option>
+                  </select>
+            </div>
+            <div class="d-flex flex-column gap-2 w-100">
+                <label for="pembayaran">Pembayaran</label>
+                <select name="pembayaran" id="pembayaran" class="form-select" aria-label="Default select example">
+                    <option selected>Pilih pembayaran</option>
+                    <option value="PayPal">PayPal</option>
+                    <option value="cc">Kartu Kredit</option>
+                    <option value="debit">Kartu Debit</option>
+                    <option value="other">Other</option>
+                  </select>
+            </div>
+            <div class="d-flex gap-2 w-100">
+                <a href="/ticket" class="btn-secondary btn w-50">Cancel</a>
+                <button class="btn-success btn w-50">Beli</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

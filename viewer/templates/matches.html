@@ -16,16 +16,15 @@
         
             {% for match in matches %}
             <tr>
-                <th class="align-middle text-center">{{ match.tim_bertanding }}</th>
                 <th class="align-middle text-center">{{ match.name }}</th>
+                <th class="align-middle text-center">{{ match.stadium }}</th>
                 <th class="align-middle text-center">{{ match.dateTime }}</th>
                 <th class="align-middle text-center">
-                    <a href="/meeting/create/{{match.id_pertandingan}}">Mulai Rapat</a>
+                    <a href="/ticket/{{match.id}}/buy">Pilih</a>
                 </th>
             </tr>
             {% endfor %}
         </table>
     </div>
 </div>
-
 {% endblock %}
