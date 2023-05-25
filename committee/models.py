@@ -32,7 +32,6 @@ def get_players():
                     "ID_Pemain",
                     "Pemain"."Nama_Depan" || ' ' || "Pemain"."Nama_Belakang" || ' - ' || "Posisi"
                 FROM "Pemain"
-                WHERE "Nama_Tim" IS NULL
             """
         )
         
@@ -48,3 +47,18 @@ def get_players():
         
         return players 
     
+def get_events(id_pertandingan):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+                SELECT *
+                FROM Peristiwa
+                WHERE ID_Pertandingan = %s;
+            """ ,(id_pertandingan,)
+        )
+        
+        rows = cursor.fetchall()
+        
+        events = []
+        
+        return events

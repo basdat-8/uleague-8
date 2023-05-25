@@ -7,13 +7,31 @@
             <button class="btn-primary btn">Tambah Peristiwa</button>
             <button class="btn-success btn">Selesai</button>
         </div>
+
+        <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary">
+              <input type="radio" name="options" id="option1" value="tim1" autocomplete="off"> Tim 1
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="options" id="option2" value="tim2" autocomplete="off"> Tim 2
+            </label>
+        </div>
+          
         <table class="table table-striped table-hover">
             <tr>
                 <th class="text-center">Nama Pemain</th>
                 <th class="text-center">Peristiwa</th>
                 <th class="text-center">Waktu</th>
             </tr>
-        
+
+            {% for event in events %}
+            <tr> 
+                <th class="text-center">{{event.ID_Pemain}}</th>
+                <th class="text-center">{{event.Jenis}}</th>
+                <th class="text-center">{{event.Datetime}}</th>
+            </tr>
+            {% endfor %}
+
             <tr>
                 <th class="align-middle text-center">
                     <select id="status" class="form-select" aria-label="Default select example">
