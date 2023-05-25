@@ -10,4 +10,5 @@ urlpatterns = [
     path('team/registration', show_team_registration_page, name='show_team_registration_page'),
     path('stadium', show_stadium_page, name='show_stadium_page'),
     path('stadium/rent', show_rent_stadium_page, name='show_rent_stadium_page'),
+
 ]
