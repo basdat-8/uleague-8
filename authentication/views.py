@@ -1,5 +1,5 @@
 from http.client import HTTPResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from authentication.models import get_additional_data, get_user_by_username,get_user_role, get_user_by_role, insert_user
 
 def show_login_page(request):
@@ -12,10 +12,10 @@ def show_login_page(request):
             request.session['username'] = user['username']
             request.session['role'] = 'PENONTON' if is_penonton else 'MANAJER' if is_manajer else 'PANITIA' if is_panitia else ''
             if request.session['role'] == '':
-                return HTTPResponse('Invalid role')
+                return HttpResponse('Invalid role')
             return redirect('/')
         else:
-            return HTTPResponse('Invalid username or password.')
+            return HttpResponse('Invalid username or password.')
     
     return render(request, 'login.html')
 

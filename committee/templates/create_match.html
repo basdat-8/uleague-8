@@ -2,80 +2,91 @@
 
 {% block content %}
 <div class="d-flex flex-column gap-4 align-items-center justify-content-center w-75 vh-100 py-5">
-    <form action="" class="d-flex flex-column gap-4 align-items-center w-75">
+    <form action="/match/create" class="d-flex flex-column gap-4 align-items-center w-75" method="post">
+        {% csrf_token %}
         <span class="fw-semibold fs-2">Buat Pertandingan</span>
         <div class="d-flex flex-column gap-3 w-50">
             <div class="d-flex flex-column gap-2 w-100">
+                <label for="stadium">Stadium</label>
+                <select name="stadium" id="stadium" class="form-select" aria-label="Default select example">
+                    <option selected>Pilih Stadium</option>
+                    {% for stadium in stadiums %}
+                        <option>{{ stadium }}</option>
+                    {% endfor %}
+                  </select>
+            </div>
+            <div class="d-flex flex-column gap-2 w-100">
+                <label for="tanggal-pertandingan-awal">Tanggal Pertandingan</label>
+                <input type="datetime-local" id="tanggal-pertandingan-awal" name ="tanggal-pertandingan-awal">
+            </div>
+            <div class="d-flex flex-column gap-2 w-100">
+                <label for="tanggal-pertandingan-akhir">Tanggal Pertandingan</label>
+                <input type="datetime-local" id="tanggal-pertandingan-akhir" name ="tanggal-pertandingan-akhir">
+            </div>
+            <div class="d-flex flex-column gap-2 w-100">
                 <label for="wasit-utama">Wasit Utama</label>
-                <select id="wasit-utama" class="form-select" aria-label="Default select example">
+                <select id="wasit-utama" class="form-select" aria-label="Default select example" name="wasit-utama">
                     <option selected>Pilih Wasit Utama</option>
-                    <option value="mahasiswa">mahasiswa</option>
-                    <option value="dosen">dosen</option>
-                    <option value="tendik">tendik</option>
-                    <option value="umum">umum</option>
-                    <option value="alumni">alumni</option>
+                    {% for referee in referees %}
+                        <option>{{ referee }}</option>
+                    {% endfor %}
                   </select>
             </div>
             <div class="d-flex flex-column gap-2 w-100">
                 <label for="wasit-pembantu-1">Wasit Pembantu/Hakim Garis</label>
-                <select id="wasit-pembantu-1" class="form-select" aria-label="Default select example">
+                <select id="wasit-pembantu-1" class="form-select" aria-label="Default select example"
+                name="wasit-pembantu-1">
                     <option selected>Pilih Wasit Pembantu/Hakim Garis</option>
-                    <option value="mahasiswa">mahasiswa</option>
-                    <option value="dosen">dosen</option>
-                    <option value="tendik">tendik</option>
-                    <option value="umum">umum</option>
-                    <option value="alumni">alumni</option>
+                    {% for referee in referees %}
+                        <option>{{ referee }}</option>
+                    {% endfor %}
                   </select>
             </div>
             <div class="d-flex flex-column gap-2 w-100">
                 <label for="wasit-pembantu-2">Wasit Pembantu/Hakim Garis</label>
-                <select id="wasit-pembantu-2" class="form-select" aria-label="Default select example">
+                <select id="wasit-pembantu-2" class="form-select" aria-label="Default select example"
+                name="wasit-pembantu-2">
                     <option selected>Pilih Wasit Pembantu/Hakim Garis</option>
-                    <option value="mahasiswa">mahasiswa</option>
-                    <option value="dosen">dosen</option>
-                    <option value="tendik">tendik</option>
-                    <option value="umum">umum</option>
-                    <option value="alumni">alumni</option>
+                    {% for referee in referees %}
+                        <option>{{ referee }}</option>
+                    {% endfor %}
                   </select>
             </div>
             <div class="d-flex flex-column gap-2 w-100">
                 <label for="wasit-cadangan">Wasit Cadangan</label>
-                <select id="wasit-cadangan" class="form-select" aria-label="Default select example">
+                <select id="wasit-cadangan" class="form-select" aria-label="Default select example"
+                name="wasit-cadangan">
                     <option selected>Pilih Wasit Cadangan</option>
-                    <option value="mahasiswa">mahasiswa</option>
-                    <option value="dosen">dosen</option>
-                    <option value="tendik">tendik</option>
-                    <option value="umum">umum</option>
-                    <option value="alumni">alumni</option>
+                    {% for referee in referees %}
+                        <option>{{ referee }}</option>
+                    {% endfor %}
                   </select>
             </div>
             <div class="d-flex w-100 gap-3">
                 <div class="d-flex flex-column gap-2 w-50">
                     <label for="tim-1">Tim 1</label>
-                    <select id="tim-1" class="form-select" aria-label="Default select example">
+                    <select id="tim-1" class="form-select" aria-label="Default select example"
+                    name="tim-1">
                         <option selected>Pilih Tim 1</option>
-                        <option value="mahasiswa">mahasiswa</option>
-                        <option value="dosen">dosen</option>
-                        <option value="tendik">tendik</option>
-                        <option value="umum">umum</option>
-                        <option value="alumni">alumni</option>
+                        {% for team in teams %}
+                        <option>{{ team }}</option>
+                        {% endfor %}
                       </select>
                 </div>
                 <div class="d-flex flex-column gap-2 w-50">
                     <label for="tim-2">Tim 2</label>
-                    <select id="tim-2" class="form-select" aria-label="Default select example">
+                    <select id="tim-2" class="form-select" aria-label="Default select example"
+                    name="tim-2">
                         <option selected>Pilih Tim 2</option>
-                        <option value="mahasiswa">mahasiswa</option>
-                        <option value="dosen">dosen</option>
-                        <option value="tendik">tendik</option>
-                        <option value="umum">umum</option>
-                        <option value="alumni">alumni</option>
+                        {% for team in teams %}
+                        <option>{{ team }}</option>
+                        {% endfor %}
                       </select>
                 </div>
             </div>
             <div class="d-flex gap-2 w-100">
-                <button class="btn-secondary btn w-50">Cancel</button>
-                <button class="btn-success btn w-50">Buat</button>
+                <a href="/match/list" class="btn-secondary btn w-50" >Cancel</button>
+                <button class="btn-success btn w-50" type="submit">Buat</button>
             </div>
         </div>
     </form>
